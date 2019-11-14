@@ -4,7 +4,6 @@
 #include <time.h>
 
 int mdc(int num1, int num2) {
-
     int resto;
 
     do {
@@ -94,11 +93,53 @@ void fabio(char tarefa){
 	}
 }
 
+void teodoro (char tarefa){
+	int p = NULL;
+	int q = NULL;
+	int n;
+	char saida;
+	int v;
+	int s;
+
+	if(tarefa == 'I'){
+		scanf("%d %d", &p, &q); //receber p, q
+		n = p * q;
+		if(p == NULL || q == NULL){
+			saida = 'E';
+			printf("%c\n", saida);
+		}
+		else{
+			tarefa = 'A';
+		}
+	}
+
+	if(tarefa == 'A'){
+		int num;
+		int a;
+		int resto;
+		int q;
+
+		num = mdc(a, n);
+		if(num == 1){
+			while(resto > 0){
+				q = a / n;
+				resto = a % n;
+				
+			}
+		}
+		else{
+			saida = 'E';
+		}
+	}
+
+}
+
 int main(int argc, char *argv[]){
 	char tarefa;
 
 	if(*argv[1] == 'T'){
-
+		scanf("%c", &tarefa);
+		teodoro(tarefa);
 	}
 	else if(*argv[1] == 'F'){
 			scanf("%c", &tarefa);
