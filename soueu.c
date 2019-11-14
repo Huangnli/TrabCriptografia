@@ -22,6 +22,7 @@ void fabio(char tarefa){
 	int verificar;
 	char saida;
 	int r;
+	int x = -1;
 
 	if(tarefa == 'I'){ //identificar
 		scanf("%d %d %d", &n, &s, &v); //receber n, s, v
@@ -42,7 +43,7 @@ void fabio(char tarefa){
 		srand ((unsigned)time(NULL));
 		r = rand();//geral um r aleatorio
 		int y;
-		int x;
+		
 		y = mdc (r, n);
 		while(y != 1){
 			r = rand();//geral outro r
@@ -53,7 +54,7 @@ void fabio(char tarefa){
 		x = r % n;
 		if(verificar == 1){  //saida C ou E
 			saida = 'C';
-			tarefa = 'R';
+			tarefa = 'X';
 			printf("%c\n", saida);
 			printf("%d\n", x);
 		}
@@ -61,6 +62,10 @@ void fabio(char tarefa){
 			saida = 'E';
 			printf("%c\n", saida);
 		}
+	}
+
+	if(saida == 'C' && tarefa == 'X'){
+
 	}
 	if(saida == 'C' && tarefa == 'R'){ //responder
 		int b;
