@@ -22,6 +22,9 @@ void fabio(char tarefa){
 	int verificar;
 	char saida;
 	int r;
+	char tar;
+	int r2;
+	
 
 	if(tarefa == 'I'){ //identificar
 		scanf("%d %d %d", &n, &s, &v); //receber n, s, v
@@ -29,7 +32,6 @@ void fabio(char tarefa){
 		verificar = (((s * s) % n)* v)% n;
 		
 		if(verificar == 1){  //saida C ou E
-			tarefa = 'X';
 			saida = 'C';
 			printf("%c\n", saida);
 		}
@@ -38,6 +40,7 @@ void fabio(char tarefa){
 			printf("%c\n", saida);
 		}
 	}
+
 	if(saida == 'C' && tarefa == 'X'){ //iniciar
 		srand ((unsigned)time(NULL));
 		r = rand();//geral um r aleatorio
@@ -54,8 +57,7 @@ void fabio(char tarefa){
 		x = r % n;
 		if(verificar == 1){  //saida C ou E
 			saida = 'C';
-			tarefa = 'P';
-			printf("%c\n", saida);
+			printf("%c ", saida);
 			printf("%d\n", x);
 		}
 		else{
@@ -65,12 +67,11 @@ void fabio(char tarefa){
 	}
 
 	if(saida == 'C' && tarefa == 'P'){
-		int r1;
 		int y;
 		int x1;
-
+		int r1;
 		scanf("%d", &r1);
-
+		r2 = r1;
 		y = mdc (r1, n);
 		if(y == 1){
 			verificar = 1;
@@ -78,13 +79,12 @@ void fabio(char tarefa){
 		else{
 			verificar = 0;
 		}
-		if(verifica == 1){
+		if(verificar == 1){
 			r1 = r1 * r1;
 			x1 = r1 % n;
 			saida = 'C';
-			tarefa = 'R'
 			printf("%c ", saida);
-			printf("%d\n", x);
+			printf("%d\n", x1);
 		}
 		else{
 			saida = 'E';
@@ -96,20 +96,24 @@ void fabio(char tarefa){
 		int b;
 		int xb;
 		scanf("%d", &b);
-		if(b != 0 && b != 1){
+		//printf("%d  ", b);
+		if(b == 1 || b == 0){
+			verificar = 1;
+		}
+		else{
 			verificar = 0;
 		}
 		if(b == 0){
-			xb = r;
+			xb = r2;
 		}
 		else if(b == 1){
-				xb = (r * s)% n;
+				xb = (r2 * s)% n;
+
 		}
-		r = 0;
+		r2 = 0;
 		if(verificar == 1){  //saida C ou E
 			saida = 'C';
-			tarefa = 'T';
-			printf("%c\n", saida);
+			printf("%c ", saida);
 			printf("%d\n", xb);
 		}
 		else{
@@ -124,8 +128,8 @@ void fabio(char tarefa){
 }
 
 void teodoro (char tarefa){
-	int p = NULL;
-	int q = NULL;
+	int p = -1;
+	int q = -1;
 	int n;
 	char saida;
 	int v;
@@ -134,7 +138,7 @@ void teodoro (char tarefa){
 	if(tarefa == 'I'){
 		scanf("%d %d", &p, &q); //receber p, q
 		n = p * q;
-		if(p == NULL || q == NULL){
+		if(p == -1 || q == -1){
 			saida = 'E';
 			printf("%c\n", saida);
 		}
@@ -172,8 +176,11 @@ int main(int argc, char *argv[]){
 		teodoro(tarefa);
 	}
 	else if(*argv[1] == 'F'){
-			scanf("%c", &tarefa);
-			fabio(tarefa);
+
+			while(tarefa != 'T'){
+				scanf("%c", &tarefa);
+				fabio(tarefa);
+			}	
 	}
 	else if(*argv[1] == 'P'){
 
