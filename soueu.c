@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-int mdc(int num1, int num2) {
+long int mdc(long int num1, long int num2) {
     int resto;
 
     do {
@@ -18,19 +18,24 @@ int mdc(int num1, int num2) {
 }
 
 void fabio(char tarefa){
-	int n, s, v;
-	int verificar;
+	long int n, s, v;
+	long int verificar;
 	char saida;
-	int r;
+	long int r;
 	char tar;
-	int r2;
+	long int r2;
 	
 
 	if(tarefa == 'I'){ //identificar
-		scanf("%d %d %d", &n, &s, &v); //receber n, s, v
+		//__uint128_t S;
+		scanf("%li %li %li", &n, &s, &v); //receber n, s, v
 		
 		verificar = (((s * s) % n)* v)% n;
-		
+		/*S = s * s;
+		S = S % n;
+		S = S * v;
+		verificar = S % n;
+		*/
 		if(verificar == 1){  //saida C ou E
 			saida = 'C';
 			printf("%c\n", saida);
@@ -44,8 +49,8 @@ void fabio(char tarefa){
 	if(saida == 'C' && tarefa == 'X'){ //iniciar
 		srand ((unsigned)time(NULL));
 		r = rand();//geral um r aleatorio
-		int y;
-		int x;
+		long int y;
+		long int x;
 		
 		y = mdc (r, n);
 		while(y != 1){
@@ -58,7 +63,7 @@ void fabio(char tarefa){
 		if(verificar == 1){  //saida C ou E
 			saida = 'C';
 			printf("%c ", saida);
-			printf("%d\n", x);
+			printf("%li\n", x);
 		}
 		else{
 			saida = 'E';
@@ -67,10 +72,10 @@ void fabio(char tarefa){
 	}
 
 	if(saida == 'C' && tarefa == 'P'){
-		int y;
-		int x1;
-		int r1;
-		scanf("%d", &r1);
+		long int y;
+		long int x1;
+		long int r1;
+		scanf("%li", &r1);
 		r2 = r1;
 		y = mdc (r1, n);
 		if(y == 1){
@@ -84,7 +89,7 @@ void fabio(char tarefa){
 			x1 = r1 % n;
 			saida = 'C';
 			printf("%c ", saida);
-			printf("%d\n", x1);
+			printf("%li\n", x1);
 		}
 		else{
 			saida = 'E';
@@ -94,7 +99,7 @@ void fabio(char tarefa){
 
 	if(saida == 'C' && tarefa == 'R'){ //responder
 		int b;
-		int xb;
+		long int xb;
 		scanf("%d", &b);
 		//printf("%d  ", b);
 		if(b == 1 || b == 0){
@@ -114,7 +119,7 @@ void fabio(char tarefa){
 		if(verificar == 1){  //saida C ou E
 			saida = 'C';
 			printf("%c ", saida);
-			printf("%d\n", xb);
+			printf("%li\n", xb);
 		}
 		else{
 			saida = 'E';
