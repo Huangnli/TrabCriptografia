@@ -8,7 +8,6 @@ long int mdc(long int num1, long int num2) {
 
     do {
         resto = num1 % num2;
-
         num1 = num2;
         num2 = resto;
 
@@ -71,7 +70,7 @@ void fabio(char tarefa){
 		}
 	}
 
-	if(saida == 'C' && tarefa == 'P'){
+	if(/*saida == 'C' &&*/ tarefa == 'P'){
 		long int y;
 		long int x1;
 		long int r1;
@@ -97,7 +96,7 @@ void fabio(char tarefa){
 		}
 	}
 
-	if(saida == 'C' && tarefa == 'R'){ //responder
+	if(/*saida == 'C' && */tarefa == 'R'){ //responder
 		int b;
 		long int xb;
 		scanf("%d", &b);
@@ -173,6 +172,72 @@ void teodoro (char tarefa){
 
 }
 
+void patricia(char tarefa){
+	long int n, v;
+	int t;
+	int verificar = 0;
+	char saida;
+
+	if(tarefa == 'I'){
+		scanf("%li %li %d", &n, &v, &t); //receber n, v, t
+		if(3 <= t && t <= 50){
+			verificar = 1;
+		}
+		if(verificar == 1){
+			saida = 'C';
+			printf("%c\n", saida);
+		}
+		else{
+			saida = 'E';
+			printf("%c\n", saida);
+		}
+	}
+
+	if(tarefa == 'C'){
+		long int x, xb;
+		int b;
+		long int x1;
+		char saida;
+		scanf("%li %d %li", &x, &b, &xb);
+		if(b == 0){
+			x1 = (xb * xb) % n;
+			if(x1 == x){
+				saida = 'C';
+				printf("%c ", saida);
+				printf("%d\n", --t);
+			}
+			else{
+				saida = 'E';
+				printf("%c ", saida);
+				printf("%d\n", t);
+			}
+		}
+		else if(b == 1){
+			x1 = (xb * xb) % n;
+			x1 = (x1 * v) % n;
+			if(x1 == x){
+				saida = 'C';
+				printf("%c ", saida);
+				printf("%d\n", --t);
+			}
+			else{
+				saida = 'E';
+				printf("%c ", saida);
+				printf("%d\n", t);
+			}
+		}
+	}
+
+	if(tarefa == 'Q'){
+
+	}
+
+	if(tarefa == 'T'){ //identificar
+		saida = 'C';
+		printf("%c\n", saida);
+	}
+}
+
 int main(int argc, char *argv[]){
 	char tarefa;
 
@@ -189,6 +254,10 @@ int main(int argc, char *argv[]){
 	}
 	else if(*argv[1] == 'P'){
 
+			while(tarefa != 'T'){
+				scanf("%c", &tarefa);
+				patricia(tarefa);
+			}
 	}
 	else if(*argv[1] == 'E'){
 
