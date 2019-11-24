@@ -28,6 +28,31 @@ long int prepararX(long int r, long int r1, long int n){
 	return x;
 }
 
+long int gerarR(){
+	long int r;
+	unsigned long int n = 9223372036854775807;
+	unsigned long int r1[2];
+	int aux;
+
+	r1[0] = 0;
+	r1[1] = 9223372036854775807;
+
+	srand ((unsigned)time(NULL));
+	r = rand();//geral um r aleatorio
+
+	while(r1[0] != r1[1]){
+		aux = r % 2;
+		if(aux == 1){
+			r1[0] = r1[1] / 2;
+		}
+		else{
+			r1[1] = r1[1] / 2;
+		}
+	}
+	r = r1[0];
+	return r;
+}
+
 void fabio(char tarefa){
 	long int n, s, v;
 	long int verificar;
@@ -42,11 +67,7 @@ void fabio(char tarefa){
 		scanf("%li %li %li", &n, &s, &v); //receber n, s, v
 		
 		verificar = verifica(s, n, v);
-		/*S = s * s;
-		S = S % n;
-		S = S * v;
-		verificar = S % n;
-		*/
+
 		if(verificar == 1){  //saida C ou E
 			saida = 'C';
 			printf("%c\n", saida);
@@ -58,19 +79,21 @@ void fabio(char tarefa){
 	}
 
 	if(saida == 'C' && tarefa == 'X'){ //iniciar
-		srand ((unsigned)time(NULL));
-		r = rand();//geral um r aleatorio
+		//srand ((unsigned)time(NULL));
+		//r = rand();//geral um r aleatorio
 		long int y;
 		long int x;
-		
+
+		r = gerarR();
 		y = mdc (r, n);
 		while(y != 1){
-			r = rand();//geral outro r
+			r = gerarR();//geral outro r
 			y = mdc (n, r);
 
 		}
-		r = r * r;
-		x = r % n;
+		//r = r * r;
+		//x = r % n;
+		x = prepararX(r, r, n);
 		if(verificar == 1){  //saida C ou E
 			saida = 'C';
 			printf("%c ", saida);
