@@ -16,6 +16,18 @@ long int mdc(long int num1, long int num2) {
     return num1;
 }
 
+long int verifica(long int s, long int n, long int v){
+	long int verificar;
+	verificar = ((((__uint128_t)s * s) % n)* v)% n;
+	return verificar;
+}
+
+long int prepararX(long int r, long int r1, long int n){
+	long int x;
+	x = (((__uint128_t)r * r1) % n);
+	return x;
+}
+
 void fabio(char tarefa){
 	long int n, s, v;
 	long int verificar;
@@ -23,12 +35,13 @@ void fabio(char tarefa){
 	long int r;
 	char tar;
 	long int r2;
+	int PR, RP = 1;
 
 	if(tarefa == 'I'){ //identificar
 		//__uint128_t S;
 		scanf("%li %li %li", &n, &s, &v); //receber n, s, v
 		
-		verificar = (((s * s) % n)* v)% n;
+		verificar = verifica(s, n, v);
 		/*S = s * s;
 		S = S % n;
 		S = S * v;
@@ -69,7 +82,7 @@ void fabio(char tarefa){
 		}
 	}
 
-	if(/*saida == 'C' &&*/ tarefa == 'P'){
+	if(tarefa == 'P'){
 		long int y;
 		long int x1;
 		long int r1;
@@ -83,10 +96,12 @@ void fabio(char tarefa){
 			verificar = 0;
 		}
 		if(verificar == 1){
-			r1 = r1 * r1;
-			x1 = r1 % n;
+			//r1 = r1 * r1;
+			//x1 = r1 % n;
+			x1 = prepararX(r1, r1, n);
 			saida = 'C';
 			printf("%c ", saida);
+			saida = 'R';
 			printf("%li\n", x1);
 		}
 		else{
@@ -110,13 +125,14 @@ void fabio(char tarefa){
 			xb = r2;
 		}
 		else if(b == 1){
-				xb = (r2 * s)% n;
-
+			//xb = (r2 * s)% n;
+			xb = prepararX(r2, s, n);
 		}
 		r2 = 0;
-		if(verificar == 1){  //saida C ou E
+		if(verificar == 1 && saida == 'R'){  //saida C ou E
 			saida = 'C';
 			printf("%c ", saida);
+			saida = 'P';
 			printf("%li\n", xb);
 		}
 		else{
