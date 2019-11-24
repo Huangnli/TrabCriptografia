@@ -192,7 +192,7 @@ void teodoro (char tarefa){
 
 		if(verificar == 1){
 			saida = 'C';
-			printf("%c", saida);
+			printf("%c ", saida);
 			printf("%li\n", v);
 		}
 		else{
@@ -218,6 +218,10 @@ void teodoro (char tarefa){
 		else{
 			saida = 'E';
 		}
+	}
+	if(tarefa == 'T'){
+		saida = 'C';
+		printf("%c\n", saida);
 	}
 }
 
