@@ -23,7 +23,6 @@ void fabio(char tarefa){
 	long int r;
 	char tar;
 	long int r2;
-	
 
 	if(tarefa == 'I'){ //identificar
 		//__uint128_t S;
@@ -131,6 +130,36 @@ void fabio(char tarefa){
 	}
 }
 
+long int euclide(long int s, long int n){
+	long int euclides[100][4];
+	long int v;
+	int i = 1;
+
+	euclides[0][0] = s;
+	euclides[1][0] = n;
+	euclides[0][2] = 1;
+	euclides[1][2] = 0;
+	euclides[0][3] = 0;
+	euclides[1][3] = 1;
+	while(euclides[i][0] > 1){
+		i++;
+		euclides[i][0] = euclides[i-2][0] % euclides[i-1][0];  
+	}
+	i = 1;
+	while(euclides[i][0] > 1){
+		i++;
+		euclides[i][1] = euclides[i-2][0] / euclides[i-1][0];  
+	}
+	i = 2;
+	while(euclides[i-1][0] > 1){
+		euclides[i][2] = euclides[i-2][2] - (euclides[i][1] * euclides[i-1][2]);
+		euclides[i][3] = euclides[i-2][3] - (euclides[i][1] * euclides[i-1][3]);
+		i++;
+	}
+	v = euclides[i-1][3];
+	return v;
+}
+
 void teodoro (char tarefa){
 	int p = -1;
 	int q = -1;
@@ -154,33 +183,13 @@ void teodoro (char tarefa){
 
 	if(tarefa == 'F'){
 		long int s;
-		int i = 1;
 		long int v;
 		long int verificar;
 		scanf("%li", &s);
-		euclides[0][0] = s;
-		euclides[1][0] = n;
-		euclides[0][2] = 1;
-		euclides[1][2] = 0;
-		euclides[0][3] = 0;
-		euclides[1][3] = 1;
-		while(euclides[i][0] > 1){
-			i++;
-			euclides[i][0] = euclides[i-2][0] % euclides[i-1][0];  
-		}
-		i = 1;
-		while(euclides[i][0] > 1){
-			i++;
-			euclides[i][1] = euclides[i-2][0] / euclides[i-1][0];  
-		}
-		i = 2;
-		while(euclides[i-1][0] > 1){
-			euclides[i][2] = euclides[i-2][2] - (euclides[i][1] * euclides[i-1][2]);
-			euclides[i][3] = euclides[i-2][3] - (euclides[i][1] * euclides[i-1][3]);
-			i++;
-		}
-		v = euclides[i-1][3];
+
+		v = euclide(s, n);
 		verificar = (((s * s) % n)* v)% n;
+
 		if(verificar == 1){
 			saida = 'C';
 			printf("%c", saida);
@@ -210,7 +219,6 @@ void teodoro (char tarefa){
 			saida = 'E';
 		}
 	}
-
 }
 
 void patricia(char tarefa){
