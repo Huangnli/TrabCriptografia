@@ -30,26 +30,30 @@ long int prepararX(long int r, long int r1, long int n){
 
 long int gerarR(){
 	long int r;
-	unsigned long int n = 9223372036854775807;
+	unsigned long int n =  9223372036854775807ll;
 	unsigned long int r1[2];
 	int aux;
 
 	r1[0] = 0;
-	r1[1] = 9223372036854775807;
+	r1[1] = 9223372036854775807ll;
 
 	srand ((unsigned)time(NULL));
 	r = rand();//geral um r aleatorio
-
-	while(r1[0] != r1[1]){
+	while(r1[0] < r1[1]){
 		aux = r % 2;
+		//printf("%d\n", aux);
 		if(aux == 1){
-			r1[0] = r1[1] / 2;
+			r1[0] = (r1[0] + r1[1]) / 2;
+		//	printf("%li\n", r1[0]);
 		}
 		else{
-			r1[1] = r1[1] / 2;
+			r1[1] = (r1[0] + r1[1]) / 2;
+		//	printf("%li\n", r1[1]);
 		}
+		r = rand();//geral um r aleatorio
 	}
-	r = r1[0];
+	r = r1[1];
+	//printf("%li\n", r );
 	return r;
 }
 
@@ -89,12 +93,11 @@ void fabio(char tarefa){
 		while(y != 1){
 			r = gerarR();//geral outro r
 			y = mdc (n, r);
-
 		}
 		//r = r * r;
 		//x = r % n;
 		x = prepararX(r, r, n);
-		if(verificar == 1){  //saida C ou E
+		if(verificar == 1 ){  //saida C ou E
 			saida = 'C';
 			printf("%c ", saida);
 			printf("%li\n", x);
