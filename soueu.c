@@ -283,8 +283,10 @@ int main(int argc, char *argv[]){
 	char tarefa;
 
 	if(*argv[1] == 'T'){
-		scanf("%c", &tarefa);
-		teodoro(tarefa);
+		while(tarefa != 'T'){
+			scanf("%c", &tarefa);
+			teodoro(tarefa);
+		}
 	}
 	else if(*argv[1] == 'F'){
 
