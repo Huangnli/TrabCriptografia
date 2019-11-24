@@ -134,20 +134,61 @@ void fabio(char tarefa){
 void teodoro (char tarefa){
 	int p = -1;
 	int q = -1;
-	int n;
+	long int n;
 	char saida;
-	int v;
-	int s;
+	long int euclides[100][4];
 
 	if(tarefa == 'I'){
 		scanf("%d %d", &p, &q); //receber p, q
 		n = p * q;
 		if(p == -1 || q == -1){
 			saida = 'E';
-			printf("%c\n", saida);
+			printf("%c ", saida);
 		}
 		else{
-			tarefa = 'A';
+			saida = 'C';
+			printf("%c ", saida);
+			printf("%li\n", n);
+		}
+	}
+
+	if(tarefa == 'F'){
+		long int s;
+		int i = 1;
+		long int v;
+		long int verificar;
+		scanf("%li", &s);
+		euclides[0][0] = s;
+		euclides[1][0] = n;
+		euclides[0][2] = 1;
+		euclides[1][2] = 0;
+		euclides[0][3] = 0;
+		euclides[1][3] = 1;
+		while(euclides[i][0] > 1){
+			i++;
+			euclides[i][0] = euclides[i-2][0] % euclides[i-1][0];  
+		}
+		i = 1;
+		while(euclides[i][0] > 1){
+			i++;
+			euclides[i][1] = euclides[i-2][0] / euclides[i-1][0];  
+		}
+		i = 2;
+		while(euclides[i-1][0] > 1){
+			euclides[i][2] = euclides[i-2][2] - (euclides[i][1] * euclides[i-1][2]);
+			euclides[i][3] = euclides[i-2][3] - (euclides[i][1] * euclides[i-1][3]);
+			i++;
+		}
+		v = euclides[i-1][3];
+		verificar = (((s * s) % n)* v)% n;
+		if(verificar == 1){
+			saida = 'C';
+			printf("%c", saida);
+			printf("%li\n", v);
+		}
+		else{
+			saida = 'E';
+			printf("%c\n", saida);
 		}
 	}
 
