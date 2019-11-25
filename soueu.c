@@ -198,19 +198,30 @@ long int euclide(long int s, long int n){
 		euclides[i][3] = euclides[i-2][3] - (euclides[i][1] * euclides[i-1][3]);
 		i++;
 	}
-	v = euclides[i-1][3];
+	for(int k = 0; k < i; k++){
+		//printf("%li\n", euclides[k][0]);
+		printf("%li\n", euclides[i-1][2]);
+		printf("%li\n", euclides[k][3]);
+	}
+
+	if(euclides[i-1][3] >= 0){
+		v = euclides[i-1][3];
+	}
+	else{
+		v = euclides[i-1][3] + s; 
+	}
 	return v;
 }
 
 void teodoro (char tarefa){
-	int p = -1;
-	int q = -1;
+	long int p = -1;
+	long int q = -1;
 	long int n;
 	char saida;
 	long int euclides[100][4];
 
 	if(tarefa == 'I'){
-		scanf("%d %d", &p, &q); //receber p, q
+		scanf("%li %li", &p, &q); //receber p, q
 		n = p * q;
 		if(p == -1 || q == -1){
 			saida = 'E';
@@ -230,8 +241,9 @@ void teodoro (char tarefa){
 		scanf("%li", &s);
 
 		v = euclide(s, n);
-		verificar = (((s * s) % n)* v)% n;
-
+		//verificar = (((s * s) % n)* v)% n;
+		printf("%li %li %li\n", s, n, v);
+		verificar = verifica(s, n, v);
 		if(verificar == 1){
 			saida = 'C';
 			printf("%c ", saida);
