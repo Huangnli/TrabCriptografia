@@ -198,11 +198,11 @@ long int euclide(long int s, long int n){
 		euclides[i][3] = euclides[i-2][3] - (euclides[i][1] * euclides[i-1][3]);
 		i++;
 	}
-	for(int k = 0; k < i; k++){
+	//for(int k = 0; k < i; k++){
 		//printf("%li\n", euclides[k][0]);
-		printf("%li\n", euclides[i-1][2]);
-		printf("%li\n", euclides[k][3]);
-	}
+		//printf("%li\n", euclides[i-1][2]);
+		//printf("%li\n", euclides[k][3]);
+	//}
 
 	if(euclides[i-1][3] >= 0){
 		v = euclides[i-1][3];
@@ -237,12 +237,13 @@ void teodoro (char tarefa){
 	if(tarefa == 'F'){
 		long int s;
 		long int v;
+		long int ss;
 		long int verificar;
 		scanf("%li", &s);
-
-		v = euclide(s, n);
+		ss = s * s;
+		v = euclide(n, ss);
 		//verificar = (((s * s) % n)* v)% n;
-		printf("%li %li %li\n", s, n, v);
+		//printf("%li %li %li\n", s, n, v);
 		verificar = verifica(s, n, v);
 		if(verificar == 1){
 			saida = 'C';
@@ -420,32 +421,6 @@ void patricia(char tarefa){
 	}
 }
 
-void ester(char tarefa){
-	long int n;
-	long int v;
-	char saida;
-
-	if(tarefa == 'I'){
-		scanf("%li %li", &n, &v);
-		saida = 'C';
-		printf("%c ", saida);
-
-	}
-
-	if(tarefa == 'S'){
-		long int x0;
-		long int x1;
-		scanf("%li %li", &x0, &x1);
-	
-
-	}
-	
-	if(tarefa == 'T'){ 
-		saida = 'C';
-		printf("%c\n", saida);
-	}
-}
-
 int main(int argc, char *argv[]){
 	char tarefa;
 
@@ -457,24 +432,20 @@ int main(int argc, char *argv[]){
 	}
 	else if(*argv[1] == 'F'){
 
-		while(tarefa != 'T'){
-			scanf("%c", &tarefa);
-			fabio(tarefa);
-		}	
+			while(tarefa != 'T'){
+				scanf("%c", &tarefa);
+				fabio(tarefa);
+			}	
 	}
 	else if(*argv[1] == 'P'){
 
-		while(tarefa != 'T'){
-			scanf("%c", &tarefa);
-			patricia(tarefa);
-		}
+			while(tarefa != 'T'){
+				scanf("%c", &tarefa);
+				patricia(tarefa);
+			}
 	}
 	else if(*argv[1] == 'E'){
 
-		while(tarefa != 'T'){
-				scanf("%c", &tarefa);
-				ester(tarefa);
-			}
 	}
 
 	return 0;
