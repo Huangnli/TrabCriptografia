@@ -203,7 +203,6 @@ long int euclide(long int s, long int n){
 		//printf("%li\n", euclides[i-1][2]);
 		//printf("%li\n", euclides[k][3]);
 	//}
-
 	if(euclides[i-1][3] >= 0){
 		v = euclides[i-1][3];
 	}
@@ -211,6 +210,35 @@ long int euclide(long int s, long int n){
 		v = euclides[i-1][3] + s; 
 	}
 	return v;
+}
+
+long int gerarS(long int n){
+	long int r;
+	unsigned long int nn =  n;
+	unsigned long int r1[2];
+	int aux;
+
+	r1[0] = 2;
+	r1[1] = n;
+
+	srand ((unsigned)time(NULL));
+	r = rand();//geral um r aleatorio
+	while(r1[0] < r1[1]){
+		aux = r % 2;
+		//printf("%d\n", aux);
+		if(aux == 1){
+			r1[0] = (r1[0] + r1[1]) / 2;
+		//	printf("%li\n", r1[0]);
+		}
+		else{
+			r1[1] = (r1[0] + r1[1]) / 2;
+		//	printf("%li\n", r1[1]);
+		}
+		r = rand();//geral um r aleatorio
+	}
+	r = r1[1];
+	//printf("%li\n", r );
+	return r;
 }
 
 void teodoro (char tarefa){
@@ -257,21 +285,24 @@ void teodoro (char tarefa){
 	}
 
 	if(tarefa == 'A'){
-		int num;
-		int a;
-		int resto;
-		int q;
+		long int gs;
+		long int v;
+		long int gss;
+		long int verificar;
 
-		num = mdc(a, n);
-		if(num == 1){
-			while(resto > 0){
-				q = a / n;
-				resto = a % n;
-				
-			}
+		gs = gerarS(n);
+		gss = gs * gs;
+		v = euclide(n, gss);
+		//verificar = (((s * s) % n)* v)% n;
+		verificar = verifica(gs, n, v);
+		if(verificar == 1){
+			saida = 'C';
+			printf("%c ", saida);
+			printf("%li %li\n", v, gs);
 		}
 		else{
 			saida = 'E';
+			printf("%c\n", saida);
 		}
 	}
 	if(tarefa == 'T'){
