@@ -272,6 +272,8 @@ void patricia(char tarefa){
 	int t;
 	int verificar = 0;
 	char saida;
+	long int X;
+	int bit;
 
 	if(tarefa == 'I'){
 		scanf("%li %li %d", &n, &v, &t); //receber n, v, t
@@ -295,7 +297,8 @@ void patricia(char tarefa){
 		char saida;
 		scanf("%li %d %li", &x, &b, &xb);
 		if(b == 0){
-			x1 = (xb * xb) % n;
+			//x1 = (xb * xb) % n;
+			x1 = prepararX(xb, xb, n);
 			if(x1 == x){
 				saida = 'C';
 				printf("%c ", saida);
@@ -308,8 +311,10 @@ void patricia(char tarefa){
 			}
 		}
 		else if(b == 1){
-			x1 = (xb * xb) % n;
-			x1 = (x1 * v) % n;
+			//x1 = (xb * xb) % n;
+			//x1 = (x1 * v) % n;
+			x1 = prepararX(xb, xb, n);
+			x1 = prepararX(x1, v, n);
 			if(x1 == x){
 				saida = 'C';
 				printf("%c ", saida);
@@ -324,7 +329,52 @@ void patricia(char tarefa){
 	}
 
 	if(tarefa == 'Q'){
-
+		long int aleatorio;  
+		if(verificar == 0){
+			saida = 'E';
+			printf("%c\n", saida);
+		}
+		else{
+		scanf("%li", &X);
+		aleatorio = gerarR();
+		aleatorio = aleatorio % 2; //bit aleatorio
+		bit = aleatorio;
+		saida = 'C';
+		printf("%c ", saida);
+		printf("%li\n", aleatorio);
+		}
+	}
+	if(tarefa == 'V'){
+		long int xb;
+		long int x1;
+		scanf("%li", xb);
+		if(bit == 0){
+			x1 = prepararX(xb, xb, n);
+			if(x1 == X){
+				saida = 'C';
+				printf("%c ", saida);
+				printf("%d\n", --t);
+			}
+			else{
+				saida = 'E';
+				printf("%c ", saida);
+				printf("%d\n", t);
+			}
+		}
+		else if(bit == 1){
+			x1 = prepararX(xb, xb, n);
+			x1 = prepararX(x1, v, n);
+			if(x1 == X){
+				saida = 'C';
+				printf("%c ", saida);
+				printf("%d\n", --t);
+			}
+			else{
+				saida = 'E';
+				printf("%c ", saida);
+				printf("%d\n", t);
+			}
+		}
 	}
 
 	if(tarefa == 'T'){ //identificar
