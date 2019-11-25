@@ -420,6 +420,32 @@ void patricia(char tarefa){
 	}
 }
 
+void ester(char tarefa){
+	long int n;
+	long int v;
+	char saida;
+
+	if(tarefa == 'I'){
+		scanf("%li %li", &n, &v);
+		saida = 'C';
+		printf("%c ", saida);
+
+	}
+
+	if(tarefa == 'S'){
+		long int x0;
+		long int x1;
+		scanf("%li %li", &x0, &x1);
+	
+
+	}
+	
+	if(tarefa == 'T'){ 
+		saida = 'C';
+		printf("%c\n", saida);
+	}
+}
+
 int main(int argc, char *argv[]){
 	char tarefa;
 
@@ -431,20 +457,24 @@ int main(int argc, char *argv[]){
 	}
 	else if(*argv[1] == 'F'){
 
-			while(tarefa != 'T'){
-				scanf("%c", &tarefa);
-				fabio(tarefa);
-			}	
+		while(tarefa != 'T'){
+			scanf("%c", &tarefa);
+			fabio(tarefa);
+		}	
 	}
 	else if(*argv[1] == 'P'){
 
-			while(tarefa != 'T'){
-				scanf("%c", &tarefa);
-				patricia(tarefa);
-			}
+		while(tarefa != 'T'){
+			scanf("%c", &tarefa);
+			patricia(tarefa);
+		}
 	}
 	else if(*argv[1] == 'E'){
 
+		while(tarefa != 'T'){
+				scanf("%c", &tarefa);
+				ester(tarefa);
+			}
 	}
 
 	return 0;
