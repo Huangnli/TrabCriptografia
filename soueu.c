@@ -4,7 +4,7 @@
 #include <time.h>
 
 long int mdc(long int num1, long int num2) {
-    int resto;
+    long int resto;
 
     do {
         resto = num1 % num2;
@@ -115,13 +115,8 @@ void fabio(char tarefa){
 		scanf("%li", &r1);
 		r2 = r1;
 		y = mdc (r1, n);
-		if(y == 1){
-			verificar = 1;
-		}
-		else{
-			verificar = 0;
-		}
-		if(verificar == 1){
+	
+		if(y == 1 && r1 < n){
 			//r1 = r1 * r1;
 			//x1 = r1 % n;
 			x1 = prepararX(r1, r1, n);
@@ -273,7 +268,7 @@ void teodoro (char tarefa){
 		//verificar = (((s * s) % n)* v)% n;
 		//printf("%li %li %li\n", s, n, v);
 		verificar = verifica(s, n, v);
-		if(verificar == 1){
+		if(verificar == 1 && s < n){
 			saida = 'C';
 			printf("%c ", saida);
 			printf("%li\n", v);
@@ -488,7 +483,7 @@ void ester(char tarefa){
 		}
 		else if(b == 1){
 			//xb = (r2 * s)% n;
-			xb = prepararX(r, s, n);
+			//xb = prepararX(r, s, n);
 		}
 		r = 0;
 		if(r == 0){  //saida C ou E
