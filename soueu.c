@@ -465,12 +465,47 @@ void ester(char tarefa){
 
 	}
 
+	if(tarefa == 'P'){
+		long int y;
+		long int x;
+		long int r;
+		int b;
+		long int xb;
+
+		r = gerarR();
+		y = mdc (r, n);
+		while(y != 1){
+			r = gerarR();//geral outro r
+			y = mdc (n, r);
+		}
+		//r = r * r;
+		//x = r % n;
+		x = prepararX(r, r, n);
+
+		scanf("%d", b);
+		if(b == 0){
+			xb = r;
+		}
+		else if(b == 1){
+			//xb = (r2 * s)% n;
+			xb = prepararX(r, s, n);
+		}
+		r = 0;
+		if(r == 0){  //saida C ou E
+			saida = 'C';
+			printf("%c ", saida);
+			printf("%li\n", x);
+		}
+		else{
+			saida = 'E';
+			printf("%c\n", saida);
+		}
+	}
+
 	if(tarefa == 'S'){
 		long int x0;
 		long int x1;
 		scanf("%li %li", &x0, &x1);
-
-
 	}
 
 	if(tarefa == 'T'){ 
@@ -505,9 +540,9 @@ int main(int argc, char *argv[]){
 	else if(*argv[1] == 'E'){
 
 		while(tarefa != 'T'){
-				scanf("%c", &tarefa);
-				ester(tarefa);
-			}
+			scanf("%c", &tarefa);
+			ester(tarefa);
+		}
 	}
 
 	return 0;
