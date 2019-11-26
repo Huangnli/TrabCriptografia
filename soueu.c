@@ -474,6 +474,7 @@ void ester(char tarefa){
 		long int r;
 		int b;
 		long int xb;
+		long int s;
 
 		r = gerarRS(n);
 		y = mdc (r, n);
@@ -493,10 +494,9 @@ void ester(char tarefa){
 			printf("%c ", saida);
 			printf("%li %li\n", x, xb);
 		}
-		else if(b == 1){
-			//xb = (r2 * s)% n;
-			//xb = prepararX(r, s, n);
-			xb = euclide((r % n), r);
+		else if(b == 1){	
+			xb = prepararX(r, r, n);
+			x = prepararX(xb, v, n);
 			saida = 'C';
 			printf("%c ", saida);
 			printf("%li %li\n", x, xb);
@@ -506,12 +506,14 @@ void ester(char tarefa){
 	if(tarefa == 'S'){
 		long int x0;
 		long int x1;
-		long int s;
+		long int v;
+		long int ss;
 		scanf("%li %li", &x0, &x1);
-		s = euclide(x1, x0);
+		v = euclide(n, x0);
+		ss = prepararX(v, x1, n);
 		saida = 'C';
 		printf("%c ", saida);
-		printf("%li\n", s);
+		printf("%li\n", ss);
 
 	}
 
