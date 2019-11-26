@@ -408,6 +408,7 @@ void patricia(char tarefa){
 		long int xb;
 		long int x1;
 		scanf("%li", &xb);
+		Ifeito = 1;
 		if(t == 0){
 			saida = 'E';
 			printf("%c ", saida);
