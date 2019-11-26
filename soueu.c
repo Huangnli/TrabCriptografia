@@ -65,6 +65,8 @@ long int gerarRS(long int n){
 	return r;
 }
 
+int inicializadoF = 0;
+
 void fabio(char tarefa){
 	long int n, s, v;
 	long int verificar;
@@ -82,6 +84,7 @@ void fabio(char tarefa){
 
 		if(verificar == 1){  //saida C ou E
 			saida = 'C';
+			inicializadoF = 1;
 			printf("%c\n", saida);
 		}
 		else{
@@ -90,53 +93,70 @@ void fabio(char tarefa){
 		}
 	}
 
-	if(saida == 'C' && tarefa == 'X'){ //iniciar
+	if(tarefa == 'X'){ //iniciar
 		//srand ((unsigned)time(NULL));
 		//r = rand();//geral um r aleatorio
 		long int y;
 		long int x;
 
-		r = gerarRS(n);
-		y = mdc (r, n);
-		while(y != 1){
-			r = gerarRS(n);//geral outro r
-			y = mdc (n, r);
-		}
-		//r = r * r;
-		//x = r % n;
-		x = prepararX(r, r, n);
-		if(verificar == 1 ){  //saida C ou E
-			saida = 'C';
-			printf("%c ", saida);
-			printf("%li\n", x);
+		if(inicializadoF == 1){
+			r = gerarRS(n);
+			y = mdc (r, n);
+			while(y != 1){
+				r = gerarRS(n);//geral outro r
+				y = mdc (n, r);
+			}
+			//r = r * r;
+			//x = r % n;
+			x = prepararX(r, r, n);
+			if(verificar == 1 ){  //saida C ou E
+				saida = 'C';
+				printf("%c ", saida);
+				printf("%li\n", x);
+			}
+			else{
+				saida = 'E';
+				printf("%c\n", saida);
+			}
 		}
 		else{
 			saida = 'E';
 			printf("%c\n", saida);
 		}
+
+		
 	}
 
 	if(tarefa == 'P'){
 		long int y;
 		long int x1;
 		long int r1;
+
 		scanf("%li", &r1);
-		r2 = r1;
-		y = mdc (r1, n);
+
+		if(inicializadoF == 1){
+			r2 = r1;
+			y = mdc (r1, n);
 	
-		if(y == 1 && r1 < n){
-			//r1 = r1 * r1;
-			//x1 = r1 % n;
-			x1 = prepararX(r1, r1, n);
-			saida = 'C';
-			printf("%c ", saida);
-			saida = 'R';
-			printf("%li\n", x1);
+			if(y == 1 && r1 < n){
+				//r1 = r1 * r1;
+				//x1 = r1 % n;
+				x1 = prepararX(r1, r1, n);
+				saida = 'C';
+				printf("%c ", saida);
+				saida = 'R';
+				printf("%li\n", x1);
+			}
+			else{
+				saida = 'E';
+				printf("%c\n", saida);
+			}
 		}
 		else{
 			saida = 'E';
 			printf("%c\n", saida);
 		}
+		
 	}
 
 	if(/*saida == 'C' && */tarefa == 'R'){ //responder
@@ -144,30 +164,38 @@ void fabio(char tarefa){
 		long int xb;
 		scanf("%d", &b);
 		//printf("%d  ", b);
-		if(b == 1 || b == 0){
-			verificar = 1;
-		}
-		else{
-			verificar = 0;
-		}
-		if(b == 0){
-			xb = r2;
-		}
-		else if(b == 1){
-			//xb = (r2 * s)% n;
-			xb = prepararX(r2, s, n);
-		}
-		r2 = 0;
-		if(verificar == 1 && saida == 'R'){  //saida C ou E
-			saida = 'C';
-			printf("%c ", saida);
-			saida = 'P';
-			printf("%li\n", xb);
+		if(inicializadoF == 1){
+			if(b == 1 || b == 0){
+				verificar = 1;
+			}
+			else{
+				verificar = 0;
+			}
+			if(b == 0){
+				xb = r2;
+			}
+			else if(b == 1){
+				//xb = (r2 * s)% n;
+				xb = prepararX(r2, s, n);
+			}
+			r2 = 0;
+			if(verificar == 1 && saida == 'R'){  //saida C ou E
+				saida = 'C';
+				printf("%c ", saida);
+				saida = 'P';
+				printf("%li\n", xb);
+			}
+			else{
+				saida = 'E';
+				printf("%c\n", saida);
+			}
 		}
 		else{
 			saida = 'E';
 			printf("%c\n", saida);
 		}
+		
+		
 	}
 	if(tarefa == 'T'){ //identificar
 		saida = 'C';
@@ -319,6 +347,7 @@ void patricia(char tarefa){
 		char saida;
 		
 		scanf("%li %d %li", &x, &b, &xb);
+
 		if(t == 0){
 			saida = 'E';
 			printf("%c ", saida);
