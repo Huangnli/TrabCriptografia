@@ -30,7 +30,6 @@ long int prepararX(long int r, long int r1, long int n){
 
 long int gerarRS(long int n){
 	long int r;
-	unsigned long int nn =  n;
 	unsigned long int r1[2];
 	int aux;
 
@@ -72,9 +71,7 @@ void fabio(char tarefa){
 	long int verificar;
 	char saida;
 	long int r;
-	char tar;
 	long int r2;
-	int PR, RP = 1;
 
 	if(tarefa == 'I'){ //identificar
 		//__uint128_t S;
@@ -123,8 +120,6 @@ void fabio(char tarefa){
 			saida = 'E';
 			printf("%c\n", saida);
 		}
-
-		
 	}
 
 	if(tarefa == 'P'){
@@ -156,7 +151,6 @@ void fabio(char tarefa){
 			saida = 'E';
 			printf("%c\n", saida);
 		}
-		
 	}
 
 	if(/*saida == 'C' && */tarefa == 'R'){ //responder
@@ -243,12 +237,13 @@ long int euclide(long int s, long int n){
 	return v;
 }
 
+int inicializadoT = 0;
+
 void teodoro (char tarefa){
 	long int p = -1;
 	long int q = -1;
 	long int n;
 	char saida;
-	long int euclides[100][4];
 
 	if(tarefa == 'I'){
 		scanf("%li %li", &p, &q); //receber p, q
@@ -259,6 +254,7 @@ void teodoro (char tarefa){
 		}
 		else{
 			saida = 'C';
+			inicializadoT = 1;
 			printf("%c ", saida);
 			printf("%li\n", n);
 		}
@@ -270,15 +266,21 @@ void teodoro (char tarefa){
 		long int ss;
 		long int verificar;
 		scanf("%li", &s);
-		ss = s * s;
-		v = euclide(n, ss);
-		//verificar = (((s * s) % n)* v)% n;
-		//printf("%li %li %li\n", s, n, v);
-		verificar = verifica(s, n, v);
-		if(verificar == 1 && s < n){
-			saida = 'C';
-			printf("%c ", saida);
-			printf("%li\n", v);
+		if(inicializadoT == 1){
+			ss = s * s;
+			v = euclide(n, ss);
+			//verificar = (((s * s) % n)* v)% n;
+			//printf("%li %li %li\n", s, n, v);
+			verificar = verifica(s, n, v);
+			if(verificar == 1 && s < n){
+				saida = 'C';
+				printf("%c ", saida);
+				printf("%li\n", v);
+			}
+			else{
+				saida = 'E';
+				printf("%c\n", saida);
+			}
 		}
 		else{
 			saida = 'E';
@@ -291,16 +293,21 @@ void teodoro (char tarefa){
 		long int v;
 		long int gss;
 		long int verificar;
-
-		gs = gerarRS(n);
-		gss = gs * gs;
-		v = euclide(n, gss);
-		//verificar = (((s * s) % n)* v)% n;
-		verificar = verifica(gs, n, v);
-		if(verificar == 1){
-			saida = 'C';
-			printf("%c ", saida);
-			printf("%li %li\n", v, gs);
+		if(inicializadoT == 1){
+			gs = gerarRS(n);
+			gss = gs * gs;
+			v = euclide(n, gss);
+			//verificar = (((s * s) % n)* v)% n;
+			verificar = verifica(gs, n, v);
+			if(verificar == 1){
+				saida = 'C';
+				printf("%c ", saida);
+				printf("%li %li\n", v, gs);
+			}
+			else{
+				saida = 'E';
+				printf("%c\n", saida);
+			}
 		}
 		else{
 			saida = 'E';
@@ -312,6 +319,8 @@ void teodoro (char tarefa){
 		printf("%c\n", saida);
 	}
 }
+
+int inicializadoP = 0;
 
 void patricia(char tarefa){
 	long int n, v;
@@ -330,6 +339,7 @@ void patricia(char tarefa){
 			verificar = 1;
 		}
 		if(verificar == 1){
+			inicializadoP = 1;
 			Ifeito = 1;
 			saida = 'C';
 			printf("%c\n", saida);
@@ -348,58 +358,70 @@ void patricia(char tarefa){
 		
 		scanf("%li %d %li", &x, &b, &xb);
 
-		if(t == 0){
-			saida = 'E';
-			printf("%c ", saida);
-			printf("%d\n", t);
-		}else{
+		if(inicializadoP == 1){
+			if(t == 0){
+				saida = 'E';
+				printf("%c ", saida);
+				printf("%d\n", t);
+			}else{
 
-			if(b == 0){
-				//x1 = (xb * xb) % n;
-				x1 = prepararX(xb, xb, n);
-				if(x1 == x){
-					saida = 'C';
-					printf("%c ", saida);
-					printf("%d\n", --t);
+				if(b == 0){
+					//x1 = (xb * xb) % n;
+					x1 = prepararX(xb, xb, n);
+					if(x1 == x){
+						saida = 'C';
+						printf("%c ", saida);
+						printf("%d\n", --t);
+					}
+					else{
+						saida = 'E';
+						printf("%c ", saida);
+						printf("%d\n", t);
+						t = i;
+					}
 				}
-				else{
-					saida = 'E';
-					printf("%c ", saida);
-					printf("%d\n", t);
-					t = i;
+				else if(b == 1){
+					//x1 = (xb * xb) % n;
+					//x1 = (x1 * v) % n;
+					x1 = prepararX(xb, xb, n);
+					x1 = prepararX(x1, v, n);
+					if(x1 == x){
+						saida = 'C';
+						printf("%c ", saida);
+						printf("%d\n", --t);
+					}
+					else{
+						saida = 'E';
+						printf("%c ", saida);
+						printf("%d\n", t);
+						t = i;
+					}
 				}
 			}
-			else if(b == 1){
-				//x1 = (xb * xb) % n;
-				//x1 = (x1 * v) % n;
-				x1 = prepararX(xb, xb, n);
-				x1 = prepararX(x1, v, n);
-				if(x1 == x){
-					saida = 'C';
-					printf("%c ", saida);
-					printf("%d\n", --t);
-				}
-				else{
-					saida = 'E';
-					printf("%c ", saida);
-					printf("%d\n", t);
-					t = i;
-				}
-			}
+		}
+		else{
+			saida = 'E';
+			printf("%c\n", saida);
 		}
 	}
 
 	if(tarefa == 'Q'){
 		long int aleatorio;  
-		if(Ifeito == 1){
-			scanf("%li", &X);
-			aleatorio = gerarRS(n);
-			aleatorio = aleatorio % 2; //bit aleatorio
-			bit = aleatorio;
-			saida = 'C';
-			printf("%c ", saida);
-			printf("%li\n", aleatorio);
-			Ifeito = 0;
+		if(inicializadoP == 1){
+			if(Ifeito == 1){
+				scanf("%li", &X);
+				aleatorio = gerarRS(n);
+				aleatorio = aleatorio % 2; //bit aleatorio
+				bit = aleatorio;
+				saida = 'C';
+				printf("%c ", saida);
+				printf("%li\n", aleatorio);
+				Ifeito = 0;
+			}
+			else{
+				saida = 'E';
+				printf("%c\n", saida);
+			}
 		}
 		else{
 			saida = 'E';
@@ -411,42 +433,49 @@ void patricia(char tarefa){
 		long int xb;
 		long int x1;
 		scanf("%li", &xb);
-		Ifeito = 1;
-		if(t == 0){
+
+		if(inicializadoP == 1){
+			Ifeito = 1;
+			if(t == 0){
+				saida = 'E';
+				printf("%c ", saida);
+				printf("%d\n", t);
+			}else{
+				
+				if(bit == 0){
+					x1 = prepararX(xb, xb, n);
+					if(x1 == X){
+						saida = 'C';
+						printf("%c ", saida);
+						printf("%d\n", --t);
+					}
+					else{
+						saida = 'E';
+						printf("%c ", saida);
+						printf("%d\n", t);
+						t = i;
+					}
+				}
+				else if(bit == 1){
+					x1 = prepararX(xb, xb, n);
+					x1 = prepararX(x1, v, n);
+					if(x1 == X){
+						saida = 'C';
+						printf("%c ", saida);
+						printf("%d\n", --t);
+					}
+					else{
+						saida = 'E';
+						printf("%c ", saida);
+						printf("%d\n", t);
+						t = i;
+					}
+				}
+			}
+		}
+		else{
 			saida = 'E';
-			printf("%c ", saida);
-			printf("%d\n", t);
-		}else{
-			
-			if(bit == 0){
-				x1 = prepararX(xb, xb, n);
-				if(x1 == X){
-					saida = 'C';
-					printf("%c ", saida);
-					printf("%d\n", --t);
-				}
-				else{
-					saida = 'E';
-					printf("%c ", saida);
-					printf("%d\n", t);
-					t = i;
-				}
-			}
-			else if(bit == 1){
-				x1 = prepararX(xb, xb, n);
-				x1 = prepararX(x1, v, n);
-				if(x1 == X){
-					saida = 'C';
-					printf("%c ", saida);
-					printf("%d\n", --t);
-				}
-				else{
-					saida = 'E';
-					printf("%c ", saida);
-					printf("%d\n", t);
-					t = i;
-				}
-			}
+			printf("%c\n", saida);
 		}
 	}
 
@@ -455,6 +484,8 @@ void patricia(char tarefa){
 		printf("%c\n", saida);
 	}
 }
+
+int inicializadoE = 0;
 
 void ester(char tarefa){
 	long int n;
@@ -465,7 +496,7 @@ void ester(char tarefa){
 		scanf("%li %li", &n, &v);
 		saida = 'C';
 		printf("%c\n", saida);
-
+		inicializadoE = 1;
 	}
 
 	if(tarefa == 'P'){
@@ -474,32 +505,37 @@ void ester(char tarefa){
 		long int r;
 		int b;
 		long int xb;
-		long int s;
 
-		r = gerarRS(n);
-		y = mdc (r, n);
-		while(y != 1){
-			r = gerarRS(n);//geral outro r
-			y = mdc (n, r);
+		if(inicializadoE == 1){
+			r = gerarRS(n);
+			y = mdc (r, n);
+			while(y != 1){
+				r = gerarRS(n);//geral outro r
+				y = mdc (n, r);
+			}
+			//r = r * r;
+			//x = r % n;
+			x = prepararX(r, r, n);
+
+			scanf("%d", &b);
+
+			if(b == 0){
+				xb = r;
+				saida = 'C';
+				printf("%c ", saida);
+				printf("%li %li\n", x, xb);
+			}
+			else if(b == 1){	
+				xb = prepararX(r, r, n);
+				x = prepararX(xb, v, n);
+				saida = 'C';
+				printf("%c ", saida);
+				printf("%li %li\n", x, xb);
+			}
 		}
-		//r = r * r;
-		//x = r % n;
-		x = prepararX(r, r, n);
-
-		scanf("%d", &b);
-
-		if(b == 0){
-			xb = r;
-			saida = 'C';
-			printf("%c ", saida);
-			printf("%li %li\n", x, xb);
-		}
-		else if(b == 1){	
-			xb = prepararX(r, r, n);
-			x = prepararX(xb, v, n);
-			saida = 'C';
-			printf("%c ", saida);
-			printf("%li %li\n", x, xb);
+		else{
+			saida = 'E';
+			printf("%c\n", saida);
 		}
 	}
 
@@ -509,12 +545,18 @@ void ester(char tarefa){
 		long int v;
 		long int ss;
 		scanf("%li %li", &x0, &x1);
-		v = euclide(n, x0);
-		ss = prepararX(v, x1, n);
-		saida = 'C';
-		printf("%c ", saida);
-		printf("%li\n", ss);
 
+		if(inicializadoE == 1){
+			v = euclide(n, x0);
+			ss = prepararX(v, x1, n);
+			saida = 'C';
+			printf("%c ", saida);
+			printf("%li\n", ss);
+		}
+		else{
+			saida = 'E';
+			printf("%c\n", saida);
+		}
 	}
 
 	if(tarefa == 'T'){ 
