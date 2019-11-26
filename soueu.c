@@ -28,21 +28,21 @@ long int prepararX(long int r, long int r1, long int n){
 	return x;
 }
 
-long int gerarR(){
+long int gerarRS(long int n){
 	long int r;
-	unsigned long int n =  9223372036854775807ll;
+	unsigned long int nn =  n;
 	unsigned long int r1[2];
 	int aux;
 
-	r1[0] = 0;
-	r1[1] = 9223372036854775807ll;
+	r1[0] = 2;
+	r1[1] = n;
 
 	srand ((unsigned)time(NULL));
 	r = rand();//geral um r aleatorio
-	while(r1[0] < r1[1]){
+	while(r1[0] + 1 != r1[1]){
 		aux = r % 2;
 		//printf("%d\n", aux);
-		if(aux == 1){
+		if(aux == 0){
 			r1[0] = (r1[0] + r1[1]) / 2;
 		//	printf("%li\n", r1[0]);
 		}
@@ -50,9 +50,17 @@ long int gerarR(){
 			r1[1] = (r1[0] + r1[1]) / 2;
 		//	printf("%li\n", r1[1]);
 		}
+		//srand((unsigned)time(NULL));
 		r = rand();//geral um r aleatorio
 	}
-	r = r1[1];
+	r = rand();
+	aux = r % 2;
+	if(aux == 1){
+		r = r1[1];
+	}
+	else{
+		r = r1[0];
+	}
 	//printf("%li\n", r );
 	return r;
 }
@@ -88,10 +96,10 @@ void fabio(char tarefa){
 		long int y;
 		long int x;
 
-		r = gerarR();
+		r = gerarRS(n);
 		y = mdc (r, n);
 		while(y != 1){
-			r = gerarR();//geral outro r
+			r = gerarRS(n);//geral outro r
 			y = mdc (n, r);
 		}
 		//r = r * r;
@@ -207,35 +215,6 @@ long int euclide(long int s, long int n){
 	return v;
 }
 
-long int gerarS(long int n){
-	long int r;
-	unsigned long int nn =  n;
-	unsigned long int r1[2];
-	int aux;
-
-	r1[0] = 2;
-	r1[1] = n;
-
-	srand ((unsigned)time(NULL));
-	r = rand();//geral um r aleatorio
-	while(r1[0] < r1[1]){
-		aux = r % 2;
-		//printf("%d\n", aux);
-		if(aux == 1){
-			r1[0] = (r1[0] + r1[1]) / 2;
-		//	printf("%li\n", r1[0]);
-		}
-		else{
-			r1[1] = (r1[0] + r1[1]) / 2;
-		//	printf("%li\n", r1[1]);
-		}
-		r = rand();//geral um r aleatorio
-	}
-	r = r1[1];
-	//printf("%li\n", r );
-	return r;
-}
-
 void teodoro (char tarefa){
 	long int p = -1;
 	long int q = -1;
@@ -285,7 +264,7 @@ void teodoro (char tarefa){
 		long int gss;
 		long int verificar;
 
-		gs = gerarS(n);
+		gs = gerarRS(n);
 		gss = gs * gs;
 		v = euclide(n, gss);
 		//verificar = (((s * s) % n)* v)% n;
@@ -385,7 +364,7 @@ void patricia(char tarefa){
 		long int aleatorio;  
 		if(Ifeito == 1){
 			scanf("%li", &X);
-			aleatorio = gerarR();
+			aleatorio = gerarRS(n);
 			aleatorio = aleatorio % 2; //bit aleatorio
 			bit = aleatorio;
 			saida = 'C';
@@ -467,10 +446,10 @@ void ester(char tarefa){
 		int b;
 		long int xb;
 
-		r = gerarR();
+		r = gerarRS(n);
 		y = mdc (r, n);
 		while(y != 1){
-			r = gerarR();//geral outro r
+			r = gerarRS(n);//geral outro r
 			y = mdc (n, r);
 		}
 		//r = r * r;
